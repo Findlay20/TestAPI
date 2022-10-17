@@ -4,9 +4,11 @@ const server = require('../server');
 
 describe('API server', () => {
     let api;
-    let testCat = {
+    let testMovie = {
         name: 'Bob',
         age: 6,
+        releaseDate: 1995,
+        rating: 8.8 
     };
 
     beforeAll(() => {
