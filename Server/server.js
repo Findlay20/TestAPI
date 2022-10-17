@@ -7,6 +7,11 @@ const app = express();
 app.use(express.json())
 app.use(cors());
 
+
+app.get('/', (req, res) => {
+    res.send('Visit /movies to see all movies.')
+})
+
 //See all movies
 app.get('/movies', (req, res) => {
     res.send(movies);
