@@ -13,8 +13,8 @@ describe('API server', () => {
 
     beforeAll(() => {
         // start the server and store it in the api variable
-        api = server.listen(5000, () =>
-            console.log('Test server running on port 5000')
+        api = server.listen(3000, () =>
+            console.log('Test server running on port 3000')
         );
     });
 
@@ -28,36 +28,36 @@ describe('API server', () => {
         request(api).get('/').expect(200, done);
     });
 
-    it('responds to get /cats with status 200', (done) => {
-        request(api).get('/cats').expect(200, done);
+    it('responds to get /movies with status 200', (done) => {
+        request(api).get('/movies').expect(200, done);
     });
 
-    it('responds to post /cats with status 201', (done) => {
+    it('responds to post /movies with status 201', (done) => {
         request(api)
-            .post('/cats')
-            .send(testCat)
+            .post('/movies')
+            .send(testMovie)
             .set('Accept', /application\/json/)
             .expect(201)
-            .expect({ id: 4, ...testCat }, done);
+            .expect({ id: 4, ...testMovie }, done);
     });
 
-    it('retrieves a cat by id', (done) => {
+    it('retrieves a movie by id', (done) => {
         request(api)
-            .get('/cats/3')
+            .get('/movies/2')
             .expect(200)
-            .expect({ id: 3, name: 'Rumble', age: 12 }, done);
+            .expect({ id: 2, title: 'Whiplash', releaseDate: '2014', rating: 8.5 }, done);
     });
 
-    it('responds to a unknown cat id with a 404', (done) => {
-        request(api).get('/cats/42').expect(404).expect({}, done);
+    it('responds to a unknown movie id with a 404', (done) => {
+        request(api).get('/movies/42').expect(404).expect({}, done);
     });
 
-    it('responds to delete /cats/:id with status 204', async () => {
-        await request(api).delete('/cats/4').expect(204);
+    it('responds to delete /movies/:id with status 204', async () => {
+        await request(api).delete('/movies/3').expect(204);
 
-        const updatedCats = await request(api).get('/cats');
+        const updatedMovies = await request(api).get('/movies');
 
-        expect(updatedCats.body.length).toBe(3);
+        expect(updatedMovies.body.length).toBe(3);
     });
 
     it('responds to non existing paths with 404', (done) => {
