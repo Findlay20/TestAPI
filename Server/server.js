@@ -31,4 +31,27 @@ app.post('/movies', (req, res) => {
     res.send(movies);
 })
 
+//Delete a movie
+app.delete('/movies/:id', (req, res) => {
+    const movie = movies.find(m => m.id === parseInt(req.params.id));
+    if (!movie) return res.status(404).send('This movie is not in our list')
+
+    const index = movies.indexOf(movie);
+    movies.splice(index, 1);
+
+    res.send(movies)
+})
+
+//Update a movie
+app.put('/movies/:id', (req, res) => {
+    const movie = movies.find(g => g.id === parseInt(req.params.id));
+    if (!movie) return res.status(404).send('This movie is not in our list')
+
+    movie.title = req.body.title;
+    movie.releaseDate = req.body.releaseDate;
+    movie.rating = req.body.rating;
+
+    res.send(movies);
+})
+
 module.exports = app;
