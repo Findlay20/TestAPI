@@ -12,6 +12,12 @@ app.get('/', (req, res) => {
     res.send('Visit /movies to see all movies.')
 })
 
+
+app.post('/', (req, res) => {
+    res.status(405).send('Not allowed!');
+});
+
+
 //See all movies
 app.get('/movies', (req, res) => {
     res.send(movies);
