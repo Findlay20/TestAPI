@@ -39,7 +39,7 @@ app.post('/movies', (req, res) => {
         rating: req.body.rating
     };
     movies.push(movie);
-    res.send(movies);
+    res.status(201).send(movie);
 })
 
 //Delete a movie
@@ -50,7 +50,7 @@ app.delete('/movies/:id', (req, res) => {
     const index = movies.indexOf(movie);
     movies.splice(index, 1);
 
-    res.send(movies)
+    res.status(204).send(movies)
 })
 
 //Update a movie

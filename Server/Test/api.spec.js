@@ -5,8 +5,7 @@ const server = require('../server');
 describe('API server', () => {
     let api;
     let testMovie = {
-        name: 'Bob',
-        age: 6,
+        title: 'Bob',
         releaseDate: 1995,
         rating: 8.8 
     };
@@ -38,7 +37,7 @@ describe('API server', () => {
             .send(testMovie)
             .set('Accept', /application\/json/)
             .expect(201)
-            .expect({ id: 4, ...testMovie }, done);
+            .expect({ id: 5, ...testMovie }, done);
     });
 
     it('retrieves a movie by id', (done) => {
@@ -57,7 +56,7 @@ describe('API server', () => {
 
         const updatedMovies = await request(api).get('/movies');
 
-        expect(updatedMovies.body.length).toBe(3);
+        expect(updatedMovies.body.length).toBe(4);
     });
 
     it('responds to non existing paths with 404', (done) => {
